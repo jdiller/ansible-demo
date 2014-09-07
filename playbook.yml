@@ -23,7 +23,7 @@
          - users
 
     - name: add standard users
-      user: name="{{item['name']}}" groups="{{item['groups']}}"
+      user: name="{{item['name']}}" groups="{{item['groups']}}" password="{{item['password']}}"
       with_items: users
       tags:
          - users
