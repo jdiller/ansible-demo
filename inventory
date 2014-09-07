@@ -3,3 +3,16 @@ aws02.diller.ca ansible_ssh_user=ec2-user
 rack01.diller.ca ansible_ssh_user=root
 rack02.diller.ca ansible_ssh_user=root
 
+[ec2]
+aws[01:02].diller.ca
+
+[rackspace]
+rack[01:02].diller.ca
+
+[webservers]
+aws01.diller.ca
+rack01.diller.ca
+
+[dbservers]
+aws02.diller.ca
+rack02.diller.ca
