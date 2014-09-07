@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  tasks:
+    - name: ensure apache is installed and is the latest version
+      yum: pkg=httpd state=latest
+      tags:
+         - packages
+
+    - name: restart apache
+      service: name=httpd state=restarted
