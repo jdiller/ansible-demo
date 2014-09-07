@@ -1,0 +1,23 @@
+- What is it and what does it do?
+- Step 0 - Requirements
+
+- Step 1 - Inventory
+     - default: /etc/ansible/hosts
+       better: a local inventory file
+- Step 1.1 - Basic commands
+     - ansible all -m ping
+     - ansible all -a uptime
+     - ansible all -a 'service sshd status' --sudo
+
+ - Step 2.0 - Playbooks
+     - add a user
+     - add user's ssh key
+     - set password
+     - install vim, mlocate, lighttpd
+     - uninstall apache
+
+ - Step 3.0 - Templates
+     - use a template to set the lighttpd config
+         - use vars from the playbook
+         - use facts from ansible
+

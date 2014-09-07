@@ -1,0 +1,5 @@
+aws01.diller.ca ansible_ssh_user=ec2-user
+aws02.diller.ca ansible_ssh_user=ec2-user
+rack01.diller.ca ansible_ssh_user=root
+rack02.diller.ca ansible_ssh_user=root
+
