@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+    - name: ensure vim is installed and at the latest version
+      yum: pkg=vim state=latest
+
+    - name: ensure ack is installed at at the latest version
+      yum: pkg=ack state=latest
+
+    - name: set host name
+      hostname: name={{inventory_hostname}}
+
