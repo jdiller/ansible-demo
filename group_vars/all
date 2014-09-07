@@ -1,0 +1,14 @@
+std_groups:
+    - 'djs'
+    - 'mcs'
+    - 'wheel'
+users:
+    - {
+        name: 'jason',
+        groups: 'mcs,wheel'
+      }
+    - {
+       name: 'larry',
+       groups: 'djs'
+      }
+

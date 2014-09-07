@@ -1,19 +1,5 @@
 ---
 - hosts: all
-  vars:
-     std_groups:
-         - 'djs'
-         - 'mcs'
-         - 'wheel'
-     users:
-         - {
-             name: 'jason',
-             groups: 'mcs,wheel'
-           }
-         - {
-            name: 'larry',
-            groups: 'djs'
-           }
   tasks:
     - name: ensure vim is installed and at the latest version
       yum: pkg=vim state=latest
