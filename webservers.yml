@@ -5,6 +5,8 @@
       yum: pkg=httpd state=latest
       tags:
          - packages
+      notify: restart apache
 
+  handlers:
     - name: restart apache
       service: name=httpd state=restarted
