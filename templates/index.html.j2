@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <title>Ansible is fun</title>
+</head>
+<body>
+  <h1> You are viewing {{item['domain']}}.</h1>
+  <h2> Hosted on {{inventory_hostname}}</h2>
+  <section>
+    <h3> Other places you might want to visit:</h3>
+    <ul>
+    {% for host in vhosts %}
+    <li><a href="http://{{host['domain']}}">{{host['domain']}}</a></li>
+    {% endfor %}
+    </ul>
+  </section>
+</body>

@@ -1,0 +1,11 @@
+NameVirtualHost *:80
+
+{% for host in vhosts %}
+
+<VirtualHost *:80>
+   DocumentRoot {{ host['localpath'] }}
+   ServerName {{ host['domain'] }}
+   ErrorLog logs/{{ host['domain'] }}-error_log
+</VirtualHost>
+
+{% endfor %}

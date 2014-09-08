@@ -1,11 +1,45 @@
 ---
 - hosts: webservers
+  vars:
+     - vhosts:
+           - {
+               domain: 'potato.diller.ca',
+               localpath: '/var/potato.diller.ca/www/'
+             }
+           - {
+               domain: 'chicken.diller.ca',
+               localpath: '/var/chicken.diller.ca/www'
+             }
   tasks:
     - name: ensure apache is installed and is the latest version
       yum: pkg=httpd state=latest
       tags:
          - packages
       notify: restart apache
+
+    - name: add vhosts to the conf directory
+      template: src=templates/vhost.conf.j2 dest="/etc/httpd/conf.d/vhosts.conf" owner=root mode=644
+      notify: restart apache
+      tags:
+         - configuration
+
+    - name: ensure file paths exist for vhosts
+      file: dest={{item['localpath']}} owner=root state=directory
+      notify: restart apache
+      with_items: vhosts
+      tags:
+         - configuration
+
+    - name: deploy a default index page for every vhost
+      template: src=templates/index.html.j2 dest="{{item['localpath']}}/index.html"
+      with_items: vhosts
+      tags:
+         - configuration
+
+    - name: ensure iptables is stopped
+      service: name=iptables state=stopped
+      tags:
+         - configuration
 
   handlers:
     - name: restart apache
