@@ -11,6 +11,8 @@
                localpath: '/var/chicken.diller.ca/www'
              }
   tasks:
+    - include: commontasks.yml
+
     - name: ensure apache is installed and is the latest version
       yum: pkg=httpd state=latest
       tags:

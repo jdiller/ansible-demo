@@ -1,10 +1,12 @@
 ---
 - hosts: dbservers
   vars:
-     users:
+     mysql_users:
          - jason
          - larry
   tasks:
+      - include: commontasks.yml
+
       - name: ensure latest mysql server is installed
         yum: pkg=mysql-server state=latest
         tags:
@@ -20,7 +22,7 @@
 
       - name: add mysql users
         mysql_user: "name={{item}} password=''  login_host=localhost priv=*.*:ALL,GRANT state=present"
-        with_items: users
+        with_items: mysql_users
         tags:
            - users
 
