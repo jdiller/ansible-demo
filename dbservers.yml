@@ -1,6 +1,30 @@
 ---
 - hosts: dbservers
+  vars:
+     users:
+         - jason
+         - larry
   tasks:
-      - name: ensure latest mysql is installed
-        yum: pkg=mysql state=latest
+      - name: ensure latest mysql server is installed
+        yum: pkg=mysql-server state=latest
+        tags:
+           - packages
 
+      - name: ensure python mysqldb module is installed
+        yum: pkg=MySQL-python state=latest
+        tags:
+           - packages
+
+      - name: ensure mysql server is started
+        service: name=mysqld state=started
+
+      - name: add mysql users
+        mysql_user: "name={{item}} password=''  login_host=localhost priv=*.*:ALL,GRANT state=present"
+        with_items: users
+        tags:
+           - users
+
+      - name: make sure to remove any users named fred
+        mysql_user: name=fred login_host=localhost state=absent
+        tags:
+           - users
