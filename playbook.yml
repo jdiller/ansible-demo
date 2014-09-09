@@ -1,5 +1,19 @@
 ---
 - hosts: all
+  vars:
+     std_groups:
+         - 'djs'
+         - 'mcs'
+         - 'wheel'
+     users:
+         - {
+             name: 'jason',
+             groups: 'mcs,wheel'
+           }
+         - {
+            name: 'larry',
+            groups: 'djs'
+           }
   tasks:
     - name: ensure vim is installed and at the latest version
       yum: pkg=vim state=latest
@@ -10,3 +24,10 @@
     - name: set host name
       hostname: name={{inventory_hostname}}
 
+    - name: add standard groups
+      group: name={{item}}
+      with_items: std_groups
+
+    - name: add standard users
+      user: name="{{item['name']}}" groups="{{item['groups']}}"
+      with_items: users
